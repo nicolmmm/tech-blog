@@ -10,9 +10,9 @@ User.hasMany(Blogs, {
   foreignKey: "userId",
 });
 
-Comments.belongsTo(Blogs, {
+/* Comments.belongsTo(Blogs, {
   foreignKey: "id",
-});
+}); */
 
 Blogs.hasMany(Comments, {
   foreignKey: "blogId",
