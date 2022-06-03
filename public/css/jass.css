@@ -420,8 +420,8 @@ button {
 }
 
 a {
-  color: #1b89bc;
-  text-decoration: none;
+ /*  color: #1b89bc;
+  text-decoration: none; */
 }
 
 a:hover {

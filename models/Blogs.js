@@ -22,7 +22,11 @@ Blogs.init(
     },
     userId: {
       type: DataTypes.INTEGER,
-      foreignKey: true,
+
+      references: {
+        model: "user",
+        key: "id",
+      },
     },
   },
   {

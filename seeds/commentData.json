@@ -2,8 +2,32 @@
     {
       "id":"1",
       "blogId": "1",
-      "commentBody": "this is my comment...",
+      "commentBody": "mmm much to think about",
       "userId": "4"
-  }
+  },
+  {
+    "id":"2",
+    "blogId": "4",
+    "commentBody": "WRONGGGGGGGGGG",
+    "userId": "4"
+},
+{
+  "id":"3",
+  "blogId": "2",
+  "commentBody": "FNG...",
+  "userId": "4"
+},
+{
+  "id":"4",
+  "blogId": "5",
+  "commentBody": "FIRST!!!!!!.",
+  "userId": "4"
+},
+{
+  "id":"5",
+  "blogId": "1",
+  "commentBody": "looking goood!",
+  "userId": "4"
+}
   ]
   

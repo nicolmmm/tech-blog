@@ -13,8 +13,11 @@ Comments.init(
     },
     blogId: {
       type: DataTypes.INTEGER,
-      /* autoIncrement: true, */
-      foreignKey: true,
+      references: {
+        model: "blog",
+        key: "id",
+      },
+      /* foreignKey: true, */
     },
     commentBody: {
       type: DataTypes.STRING,
@@ -23,7 +26,10 @@ Comments.init(
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      /* foreignKey: true, */
+      references: {
+        model: "user",
+        key: "id",
+      },
     },
   },
   {

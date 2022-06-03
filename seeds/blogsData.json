@@ -3,6 +3,31 @@
     "id":"1",
     "title": "OPINION",
     "body": "this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! ",
-    "userId": "4"
+    "userId": "1"
+},
+
+{
+  "id":"2",
+  "title": "ENOUGH IS ENOUGH",
+  "body": "this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! ",
+  "userId": "3"
+},
+{
+  "id":"3",
+  "title": "BRB",
+  "body": "this asdfasdfasdf my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! ",
+  "userId": "2"
+},
+{
+  "id":"4",
+  "title": "RUNNING IS GOOD",
+  "body": "this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! ",
+  "userId": "4"
+},
+{
+  "id":"5",
+  "title": "blleeep blop",
+  "body": "this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! this is my opinion!!!! ",
+  "userId": "5"
 }
 ]

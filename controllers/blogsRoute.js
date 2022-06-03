@@ -1,22 +1,36 @@
 const router = require("express").Router();
-const { Blogs } = require("../models");
+const { Blogs, Comments, User } = require("../models");
+const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    // Get all users, sorted by name
-    const blogData = await Blogs.findAll();
-    // Pass serialized data into Handlebars.js template
+    const blogData = await Blogs.findAll({ include: Comments });
+
     res.status(200).json(blogData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", withAuth, async (req, res) => {
   try {
-    const blogData = await Blogs.findByPk(req.params.id);
-    // Pass serialized data into Handlebars.js template
-    res.status(200).json(blogData);
+    const blogData = await Blogs.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Comments,
+          include: User,
+        },
+      ],
+    });
+    const blog = blogData.get({ plain: true });
+    console.log("blog is **********", blog);
+    res.render("blogpost", {
+      blog,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -38,23 +52,25 @@ router.put("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    console.log(req.session, "hitting HERE");
+
     const blogData = await Blogs.create({
       title: req.body.title,
       body: req.body.body,
-      userId: req.body.userId,
+      userId: req.session.userId,
     });
-    // Pass serialized data into Handlebars.js template
+
     res.status(200).json(blogData);
   } catch (err) {
+    console.log("ERROR *********", err);
     res.status(500).json(err);
   }
 });
 
 router.delete("/:id", async (req, res) => {
   try {
-    // Get all users, sorted by name
     const blogData = await Blogs.destroy({ where: { id: req.params.id } });
-    // Pass serialized data into Handlebars.js template
+
     res.status(200).json(blogData);
   } catch (err) {
     res.status(500).json(err);

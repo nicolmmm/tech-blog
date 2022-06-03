@@ -42,10 +42,53 @@ router.post("/", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    // Pass serialized data into Handlebars.js template
+    req.session.loggedIn = true;
+
+    console.log("USER ROUTE", req.session);
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.post("/login", async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: { email: req.body.email } });
+
+    if (!userData) {
+      console.log("no user data found");
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
+      return;
+    }
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
+      return;
+    }
+    req.session.loggedIn = true;
+    req.session.userId = userData.id;
+    res.json({ user: userData, message: "You are now logged in!" });
+
+    console.log("login in route", req.session);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.post("/logout", (req, res) => {
+  // When the user logs out, destroy the session
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
   }
 });
 
