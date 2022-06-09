@@ -52,15 +52,14 @@ router.put("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    console.log(req.session, "hitting HERE");
-
     const blogData = await Blogs.create({
       title: req.body.title,
       body: req.body.body,
       userId: req.session.userId,
     });
-
-    res.status(200).json(blogData);
+    console.log("WORKING");
+    res.render("homepage");
+    /* res.status(200).json(blogData) */
   } catch (err) {
     console.log("ERROR *********", err);
     res.status(500).json(err);

@@ -15,7 +15,8 @@
     </h1>
      <nav>
     <h3><a href="/">Home</a></h3>
-     <h3><a href="/dashboard">Dashboard</a></h3>
+     <h3><a href="/newpost">New Post</a></h3>
+      <h3><a href="/">Dashboard</a></h3>
    
     {{#if loggedIn}}
     <h2><button id="logout" class="logout">Logout</button></h2>
@@ -32,6 +33,9 @@
       
   </footer>
 </body>
-<script src="./js/logout.js"></script>
-<script src="./js/commentScript.js"></script>
+
+   {{#if loggedIn}}
+   <script src="/js/logout.js"></script>
+   {{/if}}
+
 </html>

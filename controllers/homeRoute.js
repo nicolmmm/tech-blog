@@ -8,7 +8,6 @@ router.get("/", async (req, res) => {
     const blogData = await Blogs.findAll({ include: User });
 
     const blogPosts = blogData.map((blogs) => blogs.get({ plain: true }));
-    console.log("BLOGDATA IS **********************************", blogData);
     res.render("homepage", {
       blogPosts,
       loggedIn: req.session.loggedIn,
@@ -19,12 +18,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/dashboard", withAuth, async (req, res) => {
+router.get("/newpost", withAuth, async (req, res) => {
   try {
     const blogData = await Blogs.findAll({ include: Comments });
 
     const blogPosts = blogData.map((blogs) => blogs.get({ plain: true }));
-    res.render("dashboard", {
+    res.render("newPost", {
       blogPosts,
       loggedIn: req.session.loggedIn,
     });
@@ -46,5 +45,7 @@ router.get("/login", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 module.exports = router;

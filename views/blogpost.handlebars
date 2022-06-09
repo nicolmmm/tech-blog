@@ -1,14 +1,16 @@
 <div class="box">
   <div class="head">
     <h4>
-      <p>{{blog.title}}</p>
+      
+    
       <p>Posted by <b>{{blog.user.userName}}</b></p>
     </h4>
     <p>{{blog.body}}</p>
   </div>
-  <textarea></textarea>
+  <textarea data-user={{blog}} data-blog-id="{{blog.id}}" id="commentBodyInput"></textarea><button id="submitCommentButton">Submit comment</button>
   <p> {{#each blog.comments as |blogComment|}}</p>
      <li><b>{{blogComment.user.userName}}</b>
      </br>{{blogComment.commentBody}}</li> 
       {{/each}}
 </div>
+<script src="/js/commentScript.js"></script>

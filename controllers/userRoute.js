@@ -1,9 +1,11 @@
 const router = require("express").Router();
-const { User } = require("../models");
+const { User, Blogs, Comments } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
-    const userData = await User.findAll();
+    const userData = await User.findAll({
+      attributes: { exclude: ["password"] },
+    });
 
     res.status(200).json(userData);
   } catch (err) {
@@ -11,11 +13,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Dashboard route
 router.get("/:id", async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id);
+    const userData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Blogs, include: Comments }],
+    });
 
-    res.status(200).json(userData);
+    console.log("USER DATA IS", userData.get({ plain: true }));
+    res.render("dashboard", userData.get({ plain: true }));
   } catch (err) {
     res.status(500).json(err);
   }
@@ -43,6 +50,7 @@ router.post("/", async (req, res) => {
       password: req.body.password,
     });
     req.session.loggedIn = true;
+    req.session.userId = userData.id;
 
     console.log("USER ROUTE", req.session);
     res.status(200).json(userData);
@@ -54,7 +62,7 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-
+    console.log(userData);
     if (!userData) {
       console.log("no user data found");
       res

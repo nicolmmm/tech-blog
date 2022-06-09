@@ -1,8 +1,15 @@
-<h1>Dashboard</h1>
-<h3>Make a post!</h3>
-<textarea name="postTitle" id="postTitle" placeholder="Title" cols="70" rows="1"></textarea>
-<textarea name="postBody" id="postBody" placeholder="write something" cols="70" rows="10"></textarea>
-</br><button id="submitPostButton" >Submit post</button>
-
-{{!-- <script src="./js/login.js"></script> --}}
-<script src="./js/postScript.js"></script>
+{{#each blogs as |blog| }}
+<div class="row align-center mb-2">
+  <div class="col-md-8">
+  <a href="/blog/{{blog}}">
+  <h3>{{{blog.title}}}</h3>
+  
+      </a>
+      <p>Posted by <b>{{userName}}</b></p>
+  <p> {{blog.body}}</p>
+ 
+  </div>
+  <div class="col-md-8">
+  </div>
+</div>
+{{/each}}
