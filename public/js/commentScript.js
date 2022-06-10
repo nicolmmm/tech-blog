@@ -4,7 +4,7 @@ const createCommentPost = async (event) => {
 
   const commentElement = document.getElementById("commentBodyInput");
   const commentBody = commentElement.value.trim();
-  blogId = commentElement.dataset.blogId;
+  const blogId = commentElement.dataset.id;
   console.log(commentElement.dataset.user);
 
   //const commentElementBlogId = commentElement.getAttribute("data-blogId");

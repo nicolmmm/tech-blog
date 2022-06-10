@@ -25,9 +25,18 @@ router.get("/:id", withAuth, async (req, res) => {
         },
       ],
     });
+
     const blog = blogData.get({ plain: true });
-    console.log("blog is **********", blog);
+
+    console.log("User ID is", blog.userId, "session ID is", req.session.userId);
+    function userOwnPost() {
+      if (blog.userId === req.session.userId) {
+        return true;
+      }
+    }
+
     res.render("blogpost", {
+      usersPost: userOwnPost(),
       blog,
       loggedIn: req.session.loggedIn,
     });

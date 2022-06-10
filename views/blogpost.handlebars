@@ -1,16 +1,30 @@
 <div class="box">
   <div class="head">
     <h4>
-      
-    
       <p>Posted by <b>{{blog.user.userName}}</b></p>
     </h4>
+    <h3>{{blog.title}}</h3>
+    
     <p>{{blog.body}}</p>
+    <p class="createdAt">{{blog.createdAt}}</p>
   </div>
-  <textarea data-user={{blog}} data-blog-id="{{blog.id}}" id="commentBodyInput"></textarea><button id="submitCommentButton">Submit comment</button>
+
+
+  </br>
+  <textarea class="form textarea" data-user={{blog}} data-id="{{blog.id}}" id="commentBodyInput">
+
+  </textarea><button class="btn" id="submitCommentButton">Submit comment</button>
+{{#if usersPost}}
+  <button class="btn" id="deletePostButton">Delete Post</button>
+{{/if}}
+  
   <p> {{#each blog.comments as |blogComment|}}</p>
-     <li><b>{{blogComment.user.userName}}</b>
-     </br>{{blogComment.commentBody}}</li> 
+     <li class="commentLi">
+       <h4>{{blogComment.user.userName}}</h4>
+     </br>{{blogComment.commentBody}}
+      </br><p class="createdAt">{{blogComment.createdAt}}</p></li> 
       {{/each}}
 </div>
 <script src="/js/commentScript.js"></script>
+<script src="/js/deleteScript.js"></script>
+

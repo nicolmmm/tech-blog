@@ -1,15 +1,15 @@
-{{#each blogs as |blog| }}
+
+<h3>Dashboard</h3>
+
+
+{{#each userDataPlain.blogs as |blog| }}
 <div class="row align-center mb-2">
   <div class="col-md-8">
-  <a href="/blog/{{blog}}">
-  <h3>{{{blog.title}}}</h3>
-  
-      </a>
-      <p>Posted by <b>{{userName}}</b></p>
+  <a href="/blog/{{blog.id}}">
+  <h3>{{{blog.title}}}</h3></a>
   <p> {{blog.body}}</p>
- 
-  </div>
-  <div class="col-md-8">
+  <p class="createdAt">{{blog.createdAt}}</p>
+  
   </div>
 </div>
 {{/each}}

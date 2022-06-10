@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const { User, Blogs, Comments } = require("../models");
+const withAuth = require("../utils/auth");
 
-router.get("/", async (req, res) => {
+/* router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: { exclude: ["password"] },
@@ -11,18 +12,23 @@ router.get("/", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}); */
 
 //Dashboard route
-router.get("/:id", async (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id, {
+    const userData = await User.findByPk(req.session.userId, {
       attributes: { exclude: ["password"] },
       include: [{ model: Blogs, include: Comments }],
     });
-
-    console.log("USER DATA IS", userData.get({ plain: true }));
-    res.render("dashboard", userData.get({ plain: true }));
+    req.session.editPermission = true;
+    const userDataPlain = userData.get({ plain: true });
+    res.render("dashboard", {
+      userDataPlain,
+      loggedIn: req.session.loggedIn,
+      editPermission: req.session.editPermission,
+    });
+    console.log(req.session);
   } catch (err) {
     res.status(500).json(err);
   }

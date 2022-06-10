@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
       blogPosts,
       loggedIn: req.session.loggedIn,
     });
+    console.log(req.session);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -45,7 +46,5 @@ router.get("/login", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
 
 module.exports = router;
