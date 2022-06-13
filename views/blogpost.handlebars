@@ -1,9 +1,10 @@
 <div class="box">
-  <div id="postView" class="head">
+  <div id="postView" class="postView head">
+    
+    <h3>{{blog.title}}</h3>
     <h4>
       <p>Posted by <b>{{blog.user.userName}}</b></p>
     </h4>
-    <h3>{{blog.title}}</h3>
     
     <p>{{blog.body}}</p>
     <p class="createdAt">{{format_date blog.createdAt}}</p>
@@ -23,7 +24,7 @@
 
   </br>
   <div id="userButtons" >
-  <textarea class="form textarea" data-user={{blog}} data-id="{{blog.id}}" id="commentBodyInput">
+  <textarea class="form textarea" cols="90" rows="4" data-user={{blog}} data-id="{{blog.id}}" id="commentBodyInput">
   </textarea>
   <button class="btn" id="submitCommentButton">Submit comment</button>
 
@@ -36,8 +37,8 @@
 
 
   <p> {{#each blog.comments as |blogComment|}}</p>
-     <li class="commentLi">
-       <h4>{{blogComment.user.userName}}</h4>
+     <li class="commentLi postView">
+       <h5 class="commentUsername">{{blogComment.user.userName}}</h5>
      </br>{{blogComment.commentBody}}
       </br><p class="createdAt">{{format_date blogComment.createdAt}}</p></li> 
       {{/each}}
