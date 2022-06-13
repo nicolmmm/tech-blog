@@ -28,7 +28,6 @@ router.get("/:id", withAuth, async (req, res) => {
 
     const blog = blogData.get({ plain: true });
 
-    console.log("User ID is", blog.userId, "session ID is", req.session.userId);
     function userOwnPost() {
       if (blog.userId === req.session.userId) {
         return true;
@@ -47,11 +46,19 @@ router.get("/:id", withAuth, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const blogData = await Blogs.update(req.body, {
-      where: {
-        id: req.params.id,
+    const blogData = await Blogs.update(
+      {
+        title: req.body.title,
+        body: req.body.body,
+        userId: req.session.userId,
       },
-    });
+
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
 
     res.status(200).json(blogData);
   } catch (err) {

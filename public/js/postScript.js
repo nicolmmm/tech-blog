@@ -3,7 +3,6 @@ const createBlogPost = async (event) => {
 
   const title = document.getElementById("postTitle").value;
   const body = document.getElementById("postBody").value;
-
   if (title && body) {
     const response = await fetch("/blog/", {
       method: "POST",
@@ -22,5 +21,5 @@ const createBlogPost = async (event) => {
   }
 };
 
-const submit = document.getElementById("submitPostButton");
-submit.addEventListener("click", createBlogPost);
+const submitNewPost = document.getElementById("submitPostButton");
+submitNewPost.addEventListener("click", createBlogPost);

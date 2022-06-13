@@ -10,7 +10,7 @@ const deleteBlogPost = async (event) => {
 
   if (response.ok) {
     console.log("post successful");
-    document.location.replace("/");
+    document.location.replace("/user/dashboard");
   } else {
     alert("Failed to post.");
   }

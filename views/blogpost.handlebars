@@ -1,30 +1,49 @@
 <div class="box">
-  <div class="head">
+  <div id="postView" class="head">
     <h4>
       <p>Posted by <b>{{blog.user.userName}}</b></p>
     </h4>
     <h3>{{blog.title}}</h3>
     
     <p>{{blog.body}}</p>
-    <p class="createdAt">{{blog.createdAt}}</p>
+    <p class="createdAt">{{format_date blog.createdAt}}</p>
   </div>
+
+{{!-- hidden until user wants to edit post --}}
+<div id="editPostEl">
+<h1>Edit Post</h1>
+<textarea name="postTitle" id="postTitle"  cols="70" rows="1">{{blog.title}}</textarea>
+<textarea name="postBody" id="postBody"  cols="70" rows="10">{{blog.body}}</textarea>
+</br><button id="submitEditButton" >Edit Post</button>
+<button id="cancelEdit" >Cancel</button>
+</div>
+
+  
 
 
   </br>
+  <div id="userButtons" >
   <textarea class="form textarea" data-user={{blog}} data-id="{{blog.id}}" id="commentBodyInput">
+  </textarea>
+  <button class="btn" id="submitCommentButton">Submit comment</button>
 
-  </textarea><button class="btn" id="submitCommentButton">Submit comment</button>
 {{#if usersPost}}
   <button class="btn" id="deletePostButton">Delete Post</button>
+  <button class="btn" id="editPostButton">Edit Post</button>
+
 {{/if}}
-  
+  </div>
+
+
   <p> {{#each blog.comments as |blogComment|}}</p>
      <li class="commentLi">
        <h4>{{blogComment.user.userName}}</h4>
      </br>{{blogComment.commentBody}}
-      </br><p class="createdAt">{{blogComment.createdAt}}</p></li> 
+      </br><p class="createdAt">{{format_date blogComment.createdAt}}</p></li> 
       {{/each}}
 </div>
 <script src="/js/commentScript.js"></script>
 <script src="/js/deleteScript.js"></script>
+{{!-- <script src="/js/postScript.js"></script> --}}
+<script src="/js/editPostScript.js"></script>
 
