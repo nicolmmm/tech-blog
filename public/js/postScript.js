@@ -1,3 +1,5 @@
+//makes post request for new post
+
 const createBlogPost = async (event) => {
   event.preventDefault();
 
@@ -14,7 +16,7 @@ const createBlogPost = async (event) => {
       console.log("post successful");
       document.getElementById("postTitle").value = "";
       document.getElementById("postBody").value = "";
-      document.location.replace("/");
+      document.location.replace("/user/dashboard");
     } else {
       alert("Failed to post.");
     }

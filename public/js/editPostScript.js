@@ -9,15 +9,17 @@ const commentBodyInput = document.getElementById("commentBodyInput");
 const postId = commentBodyInput.dataset.id;
 
 const submitEditButton = document.getElementById("submitEditButton");
-
+//hides html elements on page when loading
 editPostEl.style.display = "none";
 
+//if user chooses to edit post this function hides regular post view elements and shows edit elements
 function toggleEditView() {
   postView.style.display = "none";
   userButtons.style.display = "none";
   editPostEl.style.display = "block";
 }
 
+//put request for editing blogs
 const editPostFunc = async (event) => {
   event.preventDefault();
 
@@ -42,6 +44,7 @@ const editPostFunc = async (event) => {
   }
 };
 
+//reverts page display if user cancels post edit.
 function cancelEdit() {
   postView.style.display = "block";
   userButtons.style.display = "block";

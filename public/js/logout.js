@@ -1,3 +1,5 @@
+//logs user out and redirects to homepage
+
 const logout = async () => {
   const response = await fetch("user/logout", {
     method: "POST",

@@ -3,6 +3,7 @@ const session = require("express-session");
 const { Blogs, Comments, User } = require("../models");
 const withAuth = require("../utils/auth");
 
+//gets all posts and associated users renders them to homepage
 router.get("/", async (req, res) => {
   try {
     const blogData = await Blogs.findAll({ include: User });
@@ -12,13 +13,13 @@ router.get("/", async (req, res) => {
       blogPosts,
       loggedIn: req.session.loggedIn,
     });
-    console.log(req.session);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
+//route to redirect to new post page
 router.get("/newpost", withAuth, async (req, res) => {
   try {
     const blogData = await Blogs.findAll({ include: Comments });
@@ -34,6 +35,7 @@ router.get("/newpost", withAuth, async (req, res) => {
   }
 });
 
+//route to login page. If user is already logged in this will redirect the user back to the home page.
 router.get("/login", async (req, res) => {
   try {
     if (req.session.loggedIn) {

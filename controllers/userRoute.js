@@ -2,19 +2,7 @@ const router = require("express").Router();
 const { User, Blogs, Comments } = require("../models");
 const withAuth = require("../utils/auth");
 
-/* router.get("/", async (req, res) => {
-  try {
-    const userData = await User.findAll({
-      attributes: { exclude: ["password"] },
-    });
-
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-}); */
-
-//Dashboard route
+//loads dashbaord with user's posts
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.userId, {
@@ -34,6 +22,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
+//update/ edit a user **2022June16 this route not currently being used.
 router.put("/:id", async (req, res) => {
   try {
     const userData = await User.update(req.body, {
@@ -48,6 +37,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//create a new user, logs user in after creating (loggedIn=true)
 router.post("/", async (req, res) => {
   try {
     const userData = await User.create({
@@ -65,10 +55,10 @@ router.post("/", async (req, res) => {
   }
 });
 
+//login rout
 router.post("/login", async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-    console.log(userData);
     if (!userData) {
       console.log("no user data found");
       res
@@ -76,7 +66,7 @@ router.post("/login", async (req, res) => {
         .json({ message: "Incorrect email or password, please try again" });
       return;
     }
-
+    //checkPasswork() function found in user model- becrypt function
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
@@ -106,11 +96,10 @@ router.post("/logout", (req, res) => {
   }
 });
 
+//delete a user **2022June16 this route not currently being used.
 router.delete("/:id", async (req, res) => {
   try {
-    // Get all users, sorted by name
     const userData = await User.destroy({ where: { id: req.params.id } });
-    // Pass serialized data into Handlebars.js template
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);

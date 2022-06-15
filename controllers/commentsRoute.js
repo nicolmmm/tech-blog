@@ -1,27 +1,27 @@
 const router = require("express").Router();
 const { Comments } = require("../models");
 
+//gets all comments. **2022June16 this route not currently being used.
 router.get("/", async (req, res) => {
   try {
-    // Get all users, sorted by name
     const commentData = await Comments.findAll();
-    // Pass serialized data into Handlebars.js template
     res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+//gets comment by ID **2022June16 this route not currently being used.
 router.get("/:id", async (req, res) => {
   try {
     const commentData = await Comments.findByPk(req.params.id);
-    // Pass serialized data into Handlebars.js template
     res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+//update/ edit a comment **2022June16 this route not currently being used.
 router.put("/:id", async (req, res) => {
   try {
     const commentData = await Comments.update(req.body, {
@@ -36,6 +36,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//post comment route
 router.post("/", async (req, res) => {
   try {
     const objData = {
@@ -53,13 +54,12 @@ router.post("/", async (req, res) => {
   }
 });
 
+//delete a comment **2022June16 this route not currently being used.
 router.delete("/:id", async (req, res) => {
   try {
-    // Get all users, sorted by name
     const commentData = await Comments.destroy({
       where: { id: req.params.id },
     });
-    // Pass serialized data into Handlebars.js template
     res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);

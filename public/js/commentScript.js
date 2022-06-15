@@ -7,9 +7,7 @@ const createCommentPost = async (event) => {
   const blogId = commentElement.dataset.id;
   console.log(commentElement.dataset.user);
 
-  //const commentElementBlogId = commentElement.getAttribute("data-blogId");
-  //const blogId = document.getElementById("blogId").value;
-
+  //makes post request for  new comments
   if (commentBody) {
     const response = await fetch("/comment/", {
       method: "POST",

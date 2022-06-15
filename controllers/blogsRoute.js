@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Blogs, Comments, User } = require("../models");
 const withAuth = require("../utils/auth");
 
+//get all blogs with associated comments
 router.get("/", async (req, res) => {
   try {
     const blogData = await Blogs.findAll({ include: Comments });
@@ -12,6 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//get blog by ID with associated user and comment
 router.get("/:id", withAuth, async (req, res) => {
   try {
     const blogData = await Blogs.findByPk(req.params.id, {
@@ -27,7 +29,7 @@ router.get("/:id", withAuth, async (req, res) => {
     });
 
     const blog = blogData.get({ plain: true });
-
+    //checks if post is from the current logged in user and passes "userPost" property to session
     function userOwnPost() {
       if (blog.userId === req.session.userId) {
         return true;
@@ -44,6 +46,7 @@ router.get("/:id", withAuth, async (req, res) => {
   }
 });
 
+//edit blog route
 router.put("/:id", async (req, res) => {
   try {
     const blogData = await Blogs.update(
@@ -66,6 +69,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//post new blog route
 router.post("/", async (req, res) => {
   try {
     const blogData = await Blogs.create({
@@ -73,15 +77,15 @@ router.post("/", async (req, res) => {
       body: req.body.body,
       userId: req.session.userId,
     });
-    console.log("WORKING");
     res.render("homepage");
     /* res.status(200).json(blogData) */
   } catch (err) {
-    console.log("ERROR *********", err);
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
+//delete blog route
 router.delete("/:id", async (req, res) => {
   try {
     const blogData = await Blogs.destroy({ where: { id: req.params.id } });

@@ -3,7 +3,7 @@ const blogId = blogElement.getAttribute("data-id");
 
 const deleteBlogPost = async (event) => {
   event.preventDefault();
-
+  //delete blog post request
   const response = await fetch("/blog/" + blogId, {
     method: "DELETE",
   });
