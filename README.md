@@ -49,7 +49,6 @@ npm run seed
 
 - NodeJS: https://nodejs.org/en/
 - MySql2:https://www.npmjs.com/package/mysql2
-- Charts.js: https://www.npmjs.com/package/chart.js
 - Bcrypt: https://www.npmjs.com/package/bcrypt
 - Sequelize: https://www.npmjs.com/package/sequelize
 - Express.js: https://www.npmjs.com/package/express
