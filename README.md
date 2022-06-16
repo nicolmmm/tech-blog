@@ -47,7 +47,6 @@ npm run seed
 
 ## Credits
 
-- Bootstrap: https://getbootstrap.com/
 - NodeJS: https://nodejs.org/en/
 - MySql2:https://www.npmjs.com/package/mysql2
 - Charts.js: https://www.npmjs.com/package/chart.js
