@@ -13,6 +13,7 @@ const sess = {
   secret: "red soup",
   resave: false,
   cookie: {
+    secure: true, //delete this if still doesn't work
     path: "/",
     maxAge: 60 * 60 * 1000,
     signed: false,
